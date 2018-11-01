@@ -22,7 +22,7 @@ else:
 
 PACKAGE = "market_calendars"
 NAME = "market_calendars"
-VERSION = "0.0.8"
+VERSION = "0.1.1"
 DESCRIPTION = "market_calendars " + VERSION
 AUTHOR = "iLampard"
 URL = 'https://github.com/iLampard/market_calendars'
@@ -51,9 +51,9 @@ class test(Command):
 
     def run(self):
         if sys.platform == 'win32':
-            command = "coverage run market_calendar/tests/test_main.py& coverage report& coverage html"
+            command = "coverage run market_calendars/tests/test_main.py& coverage report& coverage html"
         else:
-            command = "coverage run market_calendar/tests/test_main.py; coverage report; coverage html"
+            command = "coverage run market_calendars/tests/test_main.py; coverage report; coverage html"
         process = subprocess.Popen(command, shell=True)
         process.wait()
 
@@ -96,7 +96,11 @@ if sys.version_info > (3, 0, 0):
 else:
     requirements = "requirements/py2.txt"
 
-ext_modules = []
+ext_modules = ['market_calendars/core/enums/time_units.pyx',
+               'market_calendars/core/enums/weekdays.pyx',
+               'market_calendars/core/enums/months.pyx',
+               'market_calendars/core/enums/bizday_conventions.pyx',
+               'market_calendars/core/enums/date_generation.pyx', ]
 
 
 def generate_extensions(ext_modules, line_trace=False):
