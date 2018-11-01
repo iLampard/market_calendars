@@ -74,9 +74,9 @@ class version_build(Command):
 
     def run(self):
         git_ver = git_version()[:10]
-        configFile = 'market_calendars/__init__.py'
+        config_file = 'market_calendars/__init__.py'
 
-        file_handle = open(configFile, 'r')
+        file_handle = open(config_file, 'r')
         lines = file_handle.readlines()
         newFiles = []
         for line in lines:
@@ -85,8 +85,8 @@ class version_build(Command):
                 line = line + " + \"-" + git_ver + "\"\n"
             newFiles.append(line)
         file_handle.close()
-        os.remove(configFile)
-        file_handle = open(configFile, 'w')
+        os.remove(config_file)
+        file_handle = open(config_file, 'w')
         file_handle.writelines(newFiles)
         file_handle.close()
 
@@ -100,7 +100,13 @@ ext_modules = ['market_calendars/core/enums/time_units.pyx',
                'market_calendars/core/enums/weekdays.pyx',
                'market_calendars/core/enums/months.pyx',
                'market_calendars/core/enums/bizday_conventions.pyx',
-               'market_calendars/core/enums/date_generation.pyx', ]
+               'market_calendars/core/enums/date_generation.pyx',
+               'market_calendars/core/assert_utils.pyx',
+               'market_calendars/core/period.pyx',
+               'market_calendars/core/date.pyx',
+               'market_calendars/core/calendar.pyx',
+               'market_calendars/core/schedule.pyx',
+               ]
 
 
 def generate_extensions(ext_modules, line_trace=False):
