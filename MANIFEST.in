@@ -1,0 +1,8 @@
+include MANIFEST.in
+include .coveragerc
+include *.md
+recursive-include requirements *.txt
+recursive-include market_calendars *.csv
+recursive-include market_calendars *.pyx
+recursive-include market_calendars *.pxd
+recursive-include . *.md
