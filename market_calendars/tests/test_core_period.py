@@ -3,8 +3,8 @@ import copy
 import pickle
 import tempfile
 import os
-from market_calendar.core import (Period,
-                                  TimeUnits)
+from market_calendars.core import (Period,
+                                   TimeUnits)
 
 
 class TestPeriod(unittest.TestCase):
@@ -220,15 +220,15 @@ class TestPeriod(unittest.TestCase):
         self.assertTrue(flag, "division error: {0} / {1:d}"
                               " not equal to {2}".format(one_year, n, six_months))
 
-        sum = three_months
-        sum += six_months
-        flag = sum == Period(length=9, units=TimeUnits.Months)
+        sum_ = three_months
+        sum_ += six_months
+        flag = sum_ == Period(length=9, units=TimeUnits.Months)
         self.assertTrue(flag, "sum error: {0}"
                               " + {1}"
                               " != {2}".format(three_months, six_months, Period(length=9, units=TimeUnits.Months)))
 
-        sum += one_year
-        flag = sum == Period(length=21, units=TimeUnits.Months)
+        sum_ += one_year
+        flag = sum_ == Period(length=21, units=TimeUnits.Months)
         self.assertTrue(flag, "sum error: {0}"
                               " + {1}"
                               " + {2}"
@@ -286,16 +286,16 @@ class TestPeriod(unittest.TestCase):
         self.assertTrue(flag, "division error: {0} / {1:d}"
                               " not equal to {2}".format(one_week, n, one_day))
 
-        sum = three_days
-        sum += one_day
-        flag = sum == Period(length=4, units=TimeUnits.Days)
-        self.assertTrue(flag, "sum error: {0}"
+        sum_ = three_days
+        sum_ += one_day
+        flag = sum_ == Period(length=4, units=TimeUnits.Days)
+        self.assertTrue(flag, "sum_ error: {0}"
                               " + {1}"
                               " != {2}".format(three_days, one_day, Period(length=4, units=TimeUnits.Days)))
 
-        sum += one_week
-        flag = sum == Period(length=11, units=TimeUnits.Days)
-        self.assertTrue(flag, "sum error: {0}"
+        sum_ += one_week
+        flag = sum_ == Period(length=11, units=TimeUnits.Days)
+        self.assertTrue(flag, "sum_ error: {0}"
                               " + {1}"
                               " + {2}"
                               " != {3}".format(three_days, one_day, one_week, Period(length=11, units=TimeUnits.Days)))

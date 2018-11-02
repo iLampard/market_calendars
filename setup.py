@@ -51,7 +51,7 @@ class test(Command):
 
     def run(self):
         if sys.platform == 'win32':
-            command = "coverage run market_calendars/tests/test_main.py& coverage report& coverage html"
+            command = "cd market_calendars/tests & coverage run test_main.py& coverage report& coverage html"
         else:
             command = "coverage run market_calendars/tests/test_main.py; coverage report; coverage html"
         process = subprocess.Popen(command, shell=True)

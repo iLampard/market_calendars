@@ -4,7 +4,7 @@ import tempfile
 import pickle
 import os
 import datetime as dt
-from market_calendar.core import (Date,
+from market_calendars.core import (Date,
                                   Period,
                                   Weekdays)
 

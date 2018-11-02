@@ -3,8 +3,8 @@ import copy
 import tempfile
 import os
 import pickle
-from market_calendar.core import Date, Calendar, Period
-from market_calendar.core import BizDayConventions, Months, Weekdays
+from market_calendars.core import Date, Calendar, Period
+from market_calendars.core import BizDayConventions, Months, Weekdays
 
 
 class TestCalendar(unittest.TestCase):

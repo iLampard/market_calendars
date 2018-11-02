@@ -3,12 +3,12 @@ import copy
 import pickle
 import tempfile
 import os
-from market_calendar.core import (Date,
-                                  Period,
-                                  Calendar,
-                                  Schedule,
-                                  TimeUnits,
-                                  BizDayConventions)
+from market_calendars.core import (Date,
+                                   Period,
+                                   Calendar,
+                                   Schedule,
+                                   TimeUnits,
+                                   BizDayConventions)
 
 
 class TestSchedule(unittest.TestCase):

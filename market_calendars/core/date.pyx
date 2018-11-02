@@ -1,5 +1,6 @@
 import datetime as dt
 import six
+from dateutil.parser import parse
 import cython
 from libc.math cimport floor
 from .enums._time_units cimport TimeUnits
@@ -273,11 +274,14 @@ cdef class Date(object):
         self._month = month
         self._year = year
 
+    def strftime(self, date_format='%Y-%m-%d'):
+        date_time = self.to_datetime()
+        return date_time.strftime(date_format)
+
 cpdef check_date(date):
     if isinstance(date, six.string_types):
-        return Date.parse_iso(date)
-    else:
-        return Date.from_datetime(date)
+        date = parse(date)
+    return Date.from_datetime(date)
 
 cdef bint YEAR_IS_LEAP[301]
 cdef int YEAR_OFFSET[301]
