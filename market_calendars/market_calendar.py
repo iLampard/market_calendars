@@ -1,11 +1,27 @@
 # Fork of zipline from Quantopian. Licensed under MIT
-
+import functools
 import six
 from abc import ABCMeta, abstractmethod
 from .class_registry import RegisteryMeta
-from .core import Date, check_date, Calendar
+from .core import check_date, check_period, TimeUnits, DateGeneration, Schedule
 
 MarketCalendarMeta = type('MarketCalendarMeta', (ABCMeta, RegisteryMeta), {})
+
+
+def valid_output(func):
+    """
+    A decorator to ensure the return date is in chosen format('string' or 'datetime.datetime')
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        return_data = func(*args, **kwargs)
+        return_string = kwargs.get('return_string', False)
+        if isinstance(return_data, list) or isinstance(return_data, Schedule):
+            return [d.to_datetime() for d in return_data] if not return_string else [str(d) for d in return_data]
+        else:
+            return return_data.to_datetime() if not return_string else str(return_data)
+
+    return wrapper
 
 
 class MarketCalendar(six.with_metaclass(MarketCalendarMeta)):
@@ -59,38 +75,73 @@ class MarketCalendar(six.with_metaclass(MarketCalendarMeta)):
         """
         raise NotImplementedError()
 
+    @valid_output
     def holidays(self, start_date, end_date, **kwargs):
         start_date = check_date(start_date)
         end_date = check_date(end_date)
         include_weekends = kwargs.get('include_weekends', True)
-        return_string = kwargs.get('return_string', False)
-        if not return_string:
-            return [d.to_datetime() for d in
-                    self.core_calendar.holiday_dates_list(start_date, end_date, include_weekends)]
-        else:
-            return [str(d) for d in self.core_calendar.holiday_dates_list(start_date, end_date, include_weekends)]
+        ret_list = self.core_calendar.holiday_dates_list(start_date, end_date, include_weekends)
+        return ret_list
 
+    @valid_output
     def biz_days(self, start_date, end_date, **kwargs):
         start_date = check_date(start_date)
         end_date = check_date(end_date)
-        include_weekends = kwargs.get('include_weekends', True)
-        return_string = kwargs.get('return_string', False)
-        if not return_string:
-            return [d.to_datetime() for d in self.core_calendar.biz_day_list(start_date, end_date, include_weekends)]
-        else:
-            return [str(d) for d in self.core_calendar.biz_day_list(start_date, end_date, include_weekends)]
+        ret_list = self.core_calendar.biz_dates_list(start_date, end_date)
+        return ret_list
 
     def is_biz_day(self, ref_date):
+        ref_date = check_date(ref_date)
         return self.core_calendar.is_biz_day(ref_date)
 
     def is_holiday(self, ref_date):
+        ref_date = check_date(ref_date)
         return self.core_calendar.is_holiday(ref_date)
 
     def is_weekend(self, ref_date):
-        return self.core_calendar.is_weekend(ref_date)
+        ref_date = check_date(ref_date)
+        return self.core_calendar.is_weekend(ref_date.weekday())
 
     def is_end_of_month(self, ref_date):
+        ref_date = check_date(ref_date)
         return self.core_calendar.is_end_of_month(ref_date)
 
-    def advance_date(self, ref_date, period):
-        return self.core_calendar.advance(ref_date, period)
+    @valid_output
+    def adjust_date(self, ref_date, **kwargs):
+        ref_date = check_date(ref_date)
+        convention = kwargs.get('convention', 0)
+        return self.core_calendar.adjust_date(ref_date, convention)
+
+    @valid_output
+    def advance_date(self, ref_date, period, **kwargs):
+        ref_date = check_date(ref_date)
+        convention = kwargs.get('convention', 0)
+        period = check_period(period)
+        return self.core_calendar.advance_date(ref_date, period, convention)
+
+    @valid_output
+    def schedule(self, start_date, end_date, tenor, **kwargs):
+        start_date = check_date(start_date)
+        end_date = check_date(end_date)
+        tenor = check_period(tenor)
+        date_rule = kwargs.get('date_rule', 0)
+        date_generation_rule = kwargs.get('date_generation_rule', 1)
+        cal = self.core_calendar
+        if tenor.units() == TimeUnits.BDays:
+            schedule = []
+            if date_generation_rule == DateGeneration.Forward:
+                d = cal.adjust_date(start_date, date_rule)
+                while d <= end_date:
+                    schedule.append(d)
+                    d = cal.advance_date(d, tenor, date_rule)
+            elif date_generation_rule == DateGeneration.Backward:
+                d = cal.adjust_date(end_date, date_rule)
+                while d >= start_date:
+                    schedule.append(d)
+                    d = cal.advance_date(d, -tenor, date_rule)
+                schedule = sorted(schedule)
+        else:
+            schedule = Schedule(start_date, end_date, tenor, cal, convention=date_rule,
+                                date_generation_rule=date_generation_rule)
+
+        return schedule
