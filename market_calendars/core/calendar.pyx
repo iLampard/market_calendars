@@ -1047,6 +1047,9 @@ cdef class NullCalendar(CalendarImpl):
         pass
 
     cdef bint isBizDay(self, Date date):
+        cdef int w = date.weekday()
+        if self.isWeekEnd(w):
+            return False
         return True
 
     cdef bint isWeekEnd(self, int weekDay):
