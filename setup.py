@@ -1,3 +1,4 @@
+from market_calendars import __version__
 from setuptools import setup
 from setuptools import find_packages
 from distutils.cmd import Command
@@ -22,7 +23,7 @@ else:
 
 PACKAGE = "market_calendars"
 NAME = "market_calendars"
-VERSION = "0.1.1"
+VERSION = __version__
 DESCRIPTION = "market_calendars " + VERSION
 AUTHOR = "iLampard"
 URL = 'https://github.com/iLampard/market_calendars'
