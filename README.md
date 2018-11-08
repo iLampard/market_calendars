@@ -188,9 +188,9 @@ Note:
 
 #### 日期调整函数 date adjusted functions
 
-    调整成交易日。
+调整成交易日。
 
-    adjusted to biz-date.
+adjusted to biz-date.
 
 ```python
    cal_sse.adjust_date('20130131')
@@ -208,9 +208,9 @@ Note:
 
 #### 日期加减函数 date advance function
 
-    经过加减，返回的是交易日。
+经过加减，返回的是交易日。
 
-    Please note that advance_date returns a *biz-date*.
+Please note that advance_date returns a *biz-date*.
 
 ```python
    # add two bizdays
@@ -246,9 +246,9 @@ For more details please look at [tutorial-calendar](https://github.com/iLampard/
 
 ### Null Calendar
 
-    有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。注意此时的null calendar的假期仅包括周六日。
+有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。注意此时的null calendar的假期仅包括周六日。
 
-    Uses can use null calendar to avoid any special holidays except weekends.
+Uses can use null calendar to avoid any special holidays except weekends.
 
 ```python
    null_cal = mcal.get_calendar('null')
