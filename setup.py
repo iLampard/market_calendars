@@ -1,4 +1,4 @@
-from market_calendars import __version__
+
 from setuptools import setup
 from setuptools import find_packages
 from distutils.cmd import Command
@@ -23,7 +23,7 @@ else:
 
 PACKAGE = "market_calendars"
 NAME = "market_calendars"
-VERSION = __version__
+VERSION = '0.1.4'
 DESCRIPTION = "market_calendars " + VERSION
 AUTHOR = "iLampard"
 URL = 'https://github.com/iLampard/market_calendars'
@@ -52,7 +52,7 @@ class test(Command):
 
     def run(self):
         if sys.platform == 'win32':
-            command = "cd market_calendars/tests & coverage run test_main.py& coverage report& coverage html"
+            command = "coverage run market_calendars/tests/test_main.py& coverage report& coverage html"
         else:
             command = "coverage run market_calendars/tests/test_main.py; coverage report; coverage html"
         process = subprocess.Popen(command, shell=True)

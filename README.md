@@ -201,10 +201,15 @@ Note:
 #### 日期加减函数 date advance function
 
 ```python
+   # add two bizdays
    cal_sse.advance_date('20170427', '2b')
+   # add two bizdays and return in string
    cal_sse.advance_date('20170427', '2b', return_string=True)
+   # add one week and return in string
    cal_sse.advance_date('20170427', '1w', return_string=True)
+   # add one month and return in string
    cal_sse.advance_date('20170427', '1m', return_string=True)
+   # minus one week and return in string
    cal_sse.advance_date('20170427', '-1m', return_string=True)
 ```
 
@@ -228,10 +233,29 @@ For more details please look at [tutorial-calendar](https://github.com/iLampard/
 
 
 ### Null Calendar
-有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可
+有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。
+
+Uses can use null calendar to avoid any special holidays.cd
 
 ```python
    null_cal = mcal.get_calendar('null')
+```
+
+```python
+   null_cal.is_holiday('2018-10-01')
+```
+
+```
+    False
+```
+
+```python
+   null_cal.advance_date('20170427', '2b', return_string=True), '2017-05-01'
+   null_cal.advance_date('20180429', '1b')
+```
+```
+   '2017-05-01'
+   datetime.datetime(2018, 4, 30, 0, 0)
 ```
 
 
