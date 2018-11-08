@@ -165,14 +165,17 @@ Quick Start
    cal_sse.advance_date('20170427', '2b', return_string=True)
    cal_sse.advance_date('20170427', '1w', return_string=True)
    cal_sse.advance_date('20170427', '1m', return_string=True)
+   cal_sse.advance_date('20170427', '-1m', return_string=True)
 
 .. parsed-literal::
    datetime.datetime(2017, 5, 2, 0, 0)
    '2017-05-02'
    '2017-05-04'
    '2017-05-31'
+   '2017-03-27'
 
 .. code:: python
+   # return a list of weekly dates from '2018-01-05' to '2018-02-01'
    cal_sse.schedule('2018-01-05', '2018-02-01', '1w', return_string=True, date_generation_rule=2)
    ['2018-01-05', '2018-01-12', '2018-01-19', '2018-01-26', '2018-02-01']
 
