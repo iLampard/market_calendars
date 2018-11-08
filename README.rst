@@ -180,7 +180,7 @@ Quick Start
    ['2018-01-05', '2018-01-12', '2018-01-19', '2018-01-26', '2018-02-01']
 
 
-For more details please look at [tutorial-calendar](https://github.com/iLampard/market_calendars/blob/master/examples/tutorial_calendar.ipynb).
+For more details please look at 'tutorial-calendar<https://github.com/iLampard/market_calendars/blob/master/examples/tutorial_calendar.ipynb>'.
 
 Future
 ------
