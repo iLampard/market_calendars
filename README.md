@@ -42,16 +42,27 @@ A compiled win-64bit wheel file has been uploaded(I used VS2015 community). For 
 
 Quick Start
 -----------
+### 创建日历 Create a calendar object
+
 ```python
 
     import pandas_market_calendars as mcal
 
     # Create a calendar
     cal_sse = mcal.get_calendar('China.SSE')
+    cal_nyse = mcal.get_calendar('NYSE')
 
     # Show available calendars
     print(mcal.get_calendar_names())
 ```
+
+
+### 返回节假日列表 return holidays list
+
+Note:
+- 入参的日期为任意合法的string格式，输出的日期可以选择为datetime或者string格式。
+
+  the input date could be in any valid string format, the output date could be in either datetime or string format.
 
 ```python
     # return holidays in datetime format by default
@@ -107,6 +118,9 @@ Quick Start
      '2018-10-05']
 ```
 
+
+#### 返回交易日列表 return biz days list
+
 ```python
    # return biz days in datetime format
    cal_sse.biz_days('2015-05-20', '2015-06-01')
@@ -141,6 +155,8 @@ Quick Start
      '2015-06-01']
 ```
 
+#### 日期检验函数 date check functions
+
 ```python
    cal_sse.is_holiday('2016-10-01'), cal_sse.is_holiday('2014/9/21')
 ```
@@ -165,6 +181,9 @@ Quick Start
    (True, True)
 ```
 
+
+#### 日期调整函数 date adjusted functions
+
 ```python
    cal_sse.adjust_date('20130131')
    cal_sse.adjust_date('20130131', return_string=True)
@@ -178,6 +197,8 @@ Quick Start
    datetime.datetime(2017, 10, 9, 0, 0)
    datetime.datetime(2017, 9, 29, 0, 0)
 ```
+
+#### 日期加减函数 date advance function
 
 ```python
    cal_sse.advance_date('20170427', '2b')
@@ -195,6 +216,8 @@ Quick Start
    '2017-03-27'
 ```
 
+#### 日程函数 schedule function
+
 ```python
    # return a list of weekly dates from '2018-01-05' to '2018-02-01'
    cal_sse.schedule('2018-01-05', '2018-02-01', '1w', return_string=True, date_generation_rule=2)
@@ -202,6 +225,17 @@ Quick Start
 ```
 
 For more details please look at [tutorial-calendar](https://github.com/iLampard/market_calendars/blob/master/examples/tutorial_calendar.ipynb).
+
+
+### Null Calendar
+有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可
+
+```python
+   null_cal = mcal.get_calendar('null')
+```
+
+
+
 
 Future
 ------

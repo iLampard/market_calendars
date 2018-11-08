@@ -1,4 +1,6 @@
 from .exchange_china_sse import ChinaSSECalendar
+from .exchange_nyse import NYSEExchangeCalendar
+from .exchange_null import NullCalendar
 from .market_calendar import MarketCalendar
 
 

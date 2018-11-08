@@ -152,4 +152,5 @@ setup(
               "version_build": version_build},
     ext_modules=ext_modules_settings,
     include_dirs=[np.get_include()],
+    long_description='China and US trading calendars, with date math utilities'
 )
