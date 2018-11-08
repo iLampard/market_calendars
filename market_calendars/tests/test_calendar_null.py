@@ -55,7 +55,7 @@ class TestNullCalendar(unittest.TestCase):
         self.assertEquals(self.cal.adjust_date('2017/10/01', convention=2), dt(2017, 9, 29))
 
     def test_advance_date(self):
-        self.assertEquals(self.cal.advance_date('20170427', '2b', return_string=True), '2017-05-01')
+        self.assertEquals(self.cal.advance_date('2017-04-27', '2b', return_string=True), '2017-05-01')
         self.assertEquals(self.cal.advance_date('20170427', '1w', return_string=True), '2017-05-04')
         self.assertEquals(self.cal.advance_date('20180429', '1b'), dt(2018, 4, 30))
 

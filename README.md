@@ -42,6 +42,13 @@ A compiled win-64bit wheel file has been uploaded(I used VS2015 community). For 
 
 Quick Start
 -----------
+
+Note:
+- 入参的日期为任意合法的string格式，输出的日期可以选择为datetime或者string格式。
+
+  For functions in this package, the input date could be in any valid string format, the output date could be in either datetime or string format.
+
+
 ### 创建日历 Create a calendar object
 
 ```python
@@ -59,10 +66,7 @@ Quick Start
 
 ### 返回节假日列表 return holidays list
 
-Note:
-- 入参的日期为任意合法的string格式，输出的日期可以选择为datetime或者string格式。
 
-  the input date could be in any valid string format, the output date could be in either datetime or string format.
 
 ```python
     # return holidays in datetime format by default
@@ -183,7 +187,9 @@ Note:
 
 
 #### 日期调整函数 date adjusted functions
+    调整成交易日。
 
+    adjusted to biz-date.
 ```python
    cal_sse.adjust_date('20130131')
    cal_sse.adjust_date('20130131', return_string=True)
@@ -199,10 +205,12 @@ Note:
 ```
 
 #### 日期加减函数 date advance function
+    经过加减，返回的是交易日。
 
+    Please note that advance_date returns a *biz-date*.
 ```python
    # add two bizdays
-   cal_sse.advance_date('20170427', '2b')
+   cal_sse.advance_date('2017-04-27', '2b')
    # add two bizdays and return in string
    cal_sse.advance_date('20170427', '2b', return_string=True)
    # add one week and return in string
@@ -233,30 +241,85 @@ For more details please look at [tutorial-calendar](https://github.com/iLampard/
 
 
 ### Null Calendar
-有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。
+有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。注意此时的null calendar的假期仅包括周六日。
 
-Uses can use null calendar to avoid any special holidays.cd
+Uses can use null calendar to avoid any special holidays except weekends.
 
 ```python
    null_cal = mcal.get_calendar('null')
 ```
 
 ```python
-   null_cal.is_holiday('2018-10-01')
+   null_cal.is_holiday('2018-10-01'), null_cal.is_holiday('2018-10-06')
 ```
 
 ```
-    False
+    (False, True)
 ```
 
 ```python
-   null_cal.advance_date('20170427', '2b', return_string=True), '2017-05-01'
+   null_cal.advance_date('2017-04-27', '2b', return_string=True)
    null_cal.advance_date('20180429', '1b')
 ```
 ```
    '2017-05-01'
    datetime.datetime(2018, 4, 30, 0, 0)
 ```
+
+### Directly call core date functions
+如果用户想进行更复杂的操作，或者想进行不考虑任何假期(如双休日)，可以直接调用项目核心用cython写的*Date*。该部分代码的示例如下
+
+#### Date
+```python
+   from market_calendars.core import Date, Period
+
+   # create date object
+    current_date = Date(2015, 7, 24)
+```
+
+
+```python
+    # two days later
+    current_date + 2
+    # 1 month later
+    current_date + '1M'
+    current_date + Period('1M')
+```
+
+```
+    Date(2015, 7, 26)
+    Date(2015, 8, 24)
+    Date(2015, 8, 24)
+```
+
+#### Conversion between Date and string
+```python
+    # Date to string
+    str(current_date)
+    current_date.strftime("%Y/%m/%d")
+    current_date.strftime("%Y%m%d")
+```
+
+```
+    '2015-07-24'
+    '2015/07/24'
+    '20150724'
+```
+```python
+    # string to Date
+    Date.strptime('20160115', '%Y%m%d')
+    Date.strptime('2016-01-15', '%Y-%m-%d')
+    # datetime to Date
+    Date.from_datetime(dt.datetime(2015, 7, 24))
+```
+```
+    Date(2016, 1, 15)
+    Date(2016, 1, 15)
+    Date(2015, 7, 24)
+```
+
+
+For more details please look at [tutorial-date](https://github.com/iLampard/market_calendars/blob/master/examples/tutorial_date.ipynb).
 
 
 
