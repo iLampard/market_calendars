@@ -42,7 +42,7 @@ A compiled win-64bit wheel file has been uploaded(I used VS2015 community). For 
 
 Quick Start
 -----------
-.. code:: python
+```python
 
     import pandas_market_calendars as mcal
 
@@ -51,10 +51,12 @@ Quick Start
 
     # Show available calendars
     print(mcal.get_calendar_names())
+```
 
-.. code:: python
+```python
     # return holidays in datetime format by default
     cal_sse.holidays('2018-09-20', '2018-10-10')
+```
 
 .. parsed-literal::
     [datetime.datetime(2018, 9, 22, 0, 0),
@@ -180,7 +182,7 @@ Quick Start
    ['2018-01-05', '2018-01-12', '2018-01-19', '2018-01-26', '2018-02-01']
 
 
-For more details please look at 'tutorial-calendar<https://github.com/iLampard/market_calendars/blob/master/examples/tutorial_calendar.ipynb>'.
+For more details please look at [tutorial-calendar](https://github.com/iLampard/market_calendars/blob/master/examples/tutorial_calendar.ipynb).
 
 Future
 ------
