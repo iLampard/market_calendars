@@ -22,11 +22,11 @@ class TestSchedule(unittest.TestCase):
 
     def test_schedule_initialize(self):
         start_date = Date(2013, 3, 31)
-        end_date = Date(2013, 6, 30)
+        end_date = Date(2013, 7, 1)
         tenor = Period('1m')
         cal = Calendar('NullCalendar')
         sch = Schedule(start_date, end_date, tenor, cal)
-        expected = [Date(2013, 3, 31), Date(2013, 4, 30), Date(2013, 5, 31), Date(2013, 6, 30)]
+        expected = [Date(2013, 4, 1), Date(2013, 4, 30), Date(2013, 5, 31), Date(2013, 7, 1)]
         for i in range(sch.size()):
             self.assertEqual(expected[i], sch[i])
 
@@ -69,7 +69,7 @@ class TestSchedule(unittest.TestCase):
 
     def test_schedule_deep_copy(self):
         start_date = Date(2013, 3, 31)
-        end_date = Date(2013, 6, 30)
+        end_date = Date(2013, 7, 1)
         tenor = Period('1m')
         cal = Calendar('NullCalendar')
         sch = Schedule(start_date, end_date, tenor, cal)
@@ -79,7 +79,7 @@ class TestSchedule(unittest.TestCase):
 
     def test_schedule_pickle(self):
         start_date = Date(2013, 3, 31)
-        end_date = Date(2013, 6, 30)
+        end_date = Date(2013, 7, 1)
         tenor = Period('1m')
         cal = Calendar('NullCalendar')
         sch = Schedule(start_date, end_date, tenor, cal)

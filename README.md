@@ -187,9 +187,11 @@ Note:
 
 
 #### 日期调整函数 date adjusted functions
+
     调整成交易日。
 
     adjusted to biz-date.
+
 ```python
    cal_sse.adjust_date('20130131')
    cal_sse.adjust_date('20130131', return_string=True)
@@ -205,9 +207,11 @@ Note:
 ```
 
 #### 日期加减函数 date advance function
+
     经过加减，返回的是交易日。
 
     Please note that advance_date returns a *biz-date*.
+
 ```python
    # add two bizdays
    cal_sse.advance_date('2017-04-27', '2b')
@@ -241,9 +245,10 @@ For more details please look at [tutorial-calendar](https://github.com/iLampard/
 
 
 ### Null Calendar
-有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。注意此时的null calendar的假期仅包括周六日。
 
-Uses can use null calendar to avoid any special holidays except weekends.
+    有时候用户需要处理一些不依赖于任何日历的问题，此时可以令日历名为*null*即可。注意此时的null calendar的假期仅包括周六日。
+
+    Uses can use null calendar to avoid any special holidays except weekends.
 
 ```python
    null_cal = mcal.get_calendar('null')
@@ -267,7 +272,10 @@ Uses can use null calendar to avoid any special holidays except weekends.
 ```
 
 ### Directly call core date functions
-如果用户想进行更复杂的操作，或者想进行不考虑任何假期(如双休日)，可以直接调用项目核心用cython写的*Date*。该部分代码的示例如下
+
+    如果用户想进行更复杂的操作，或者想进行不考虑任何假期(如双休日)，可以直接调用项目核心用cython写的*Date*。该部分代码的示例如下
+
+    To avoid neither public holidays nor weekends, one can directly call *Date* functions, shown below.
 
 #### Date
 ```python

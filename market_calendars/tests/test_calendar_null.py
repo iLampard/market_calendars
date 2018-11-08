@@ -24,18 +24,23 @@ class TestNullCalendar(unittest.TestCase):
         self.assertEquals(holidays, expected)
 
     def test_biz_days(self):
-        biz_days = self.cal.biz_days('2016-04-20', '2016-05-10')
-        expected = []
+        biz_days = self.cal.biz_days('2016-04-28', '2016-05-10')
+        expected = [dt(2016, 4, 28, 0, 0), dt(2016, 4, 29, 0, 0), dt(2016, 5, 2, 0, 0), dt(2016, 5, 3, 0, 0),
+                    dt(2016, 5, 4, 0, 0),
+                    dt(2016, 5, 5, 0, 0),
+                    dt(2016, 5, 6, 0, 0),
+                    dt(2016, 5, 9, 0, 0),
+                    dt(2016, 5, 10, 0, 0)]
         self.assertEquals(biz_days, expected)
 
-        biz_days = self.cal.biz_days('20160430', '20160510', return_string=True)
-        expected = []
+        biz_days = self.cal.biz_days('20160430', '20160505', return_string=True)
+        expected = ['2016-05-02', '2016-05-03', '2016-05-04', '2016-05-05']
         self.assertEquals(biz_days, expected)
 
     def test_is_holiday(self):
-        self.assertFalse(self.cal.is_holiday('2016-10-01'))
+        self.assertFalse(self.cal.is_holiday('2016-10-03'))
         self.assertFalse(self.cal.is_holiday('20170501'))
-        self.assertFalse(self.cal.is_holiday('2014/9/21'))
+        self.assertFalse(self.cal.is_holiday('2014/9/8'))
 
     def test_is_biz_day(self):
         self.assertTrue(self.cal.is_biz_day('2014-09-22'))
