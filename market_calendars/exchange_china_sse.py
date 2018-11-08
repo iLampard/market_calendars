@@ -4,7 +4,7 @@ from market_calendars import MarketCalendar
 
 
 class ChinaSSECalendar(MarketCalendar):
-    aliases = ['China.SSE', 'china.sse']
+    aliases = ['China.SSE', 'china.sse', 'China.sse']
     @property
     def name(self):
         return 'China.SSE'
