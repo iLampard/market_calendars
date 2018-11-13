@@ -53,7 +53,7 @@ Note:
 
 ```python
 
-    import pandas_market_calendars as mcal
+    import market_calendars as mcal
 
     # Create a calendar
     cal_sse = mcal.get_calendar('China.SSE')
