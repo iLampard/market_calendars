@@ -273,9 +273,8 @@ Uses can use null calendar to avoid any special holidays except weekends.
 
 ### Directly call core date functions
 
-    如果用户想进行更复杂的操作，或者想进行不考虑任何假期(如双休日)，可以直接调用项目核心用cython写的*Date*。该部分代码的示例如下
-
-    To avoid neither public holidays nor weekends, one can directly call *Date* functions, shown below.
+如果用户想进行更复杂的操作，或者想进行不考虑任何假期(如双休日)，可以直接调用项目核心用cython写的*Date*。该部分代码的示例如下
+To avoid neither public holidays nor weekends, one can directly call *Date* functions, shown below.
 
 #### Date
 ```python
