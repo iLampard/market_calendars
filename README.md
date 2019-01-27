@@ -35,9 +35,9 @@ Installation
 
 ``pip install market_calendars``
 
-用户如果是win-64位的编译器，会自动下载已经编译好的whl文件，如果是其他编译器，需要用户本地配置好C++编译器(如VS2015社区版)，用来编译cython写的那部分代码。
+用户需要本地配置好C++编译器(如VS2015社区版)，用来编译cython写的那部分代码。
 
-A compiled win-64bit wheel file has been uploaded(I used VS2015 community). For other platforms one has to set up cpp compilers when installing the package.
+One has to set up cpp compilers(e.g. VS2015 on win or gcc on mac) when installing the package.
 
 
 Quick Start
