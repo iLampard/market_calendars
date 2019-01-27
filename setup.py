@@ -23,7 +23,7 @@ else:
 
 PACKAGE = "market_calendars"
 NAME = "market_calendars"
-VERSION = '0.1.5'
+VERSION = '0.1.6'
 DESCRIPTION = "market_calendars " + VERSION
 AUTHOR = "iLampard"
 URL = 'https://github.com/iLampard/market_calendars'
